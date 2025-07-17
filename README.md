@@ -1,20 +1,14 @@
-# dalamud-chatgpt
-using the OpenAI API from the in-game chat
-
-created mostly because I thought it would be funny.
+# dalamud-askai
+using OpenaAI API compatible models to create variety in FFXIV game chat
 
 # installation
-get it here: https://github.com/Eisenhuth/TrustworthyDalamudPlugins
-```
-https://raw.githubusercontent.com/Eisenhuth/TrustworthyDalamudPlugins/master/pluginmaster.json
 ```
 # usage
 
-**requires an API key** - click the button in the configuration which leads here: https://platform.openai.com/account/api-keys
+**requires an API key** - for OpenAI click the button in the configuration which leads here: https://platform.openai.com/account/api-keys, for local LLM just type some dummy API key
+**requires an Endpoint name** - for example https://api.openai.com/v1
+**requires a model name name** - for example gpt-4.1, gemini-2.5-pro, and other names
 
 to increase the quality of your results take a look at the [official documentation on prompt design](https://platform.openai.com/docs/guides/completion/prompt-design)
 
-
 `/gpt tell me something about the award winning MMORPG Final Fantasy XIV and format the text`
-
-![image](https://user-images.githubusercontent.com/47415874/209755099-880b50e7-4346-45e4-be94-175910a378b8.png)
