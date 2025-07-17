@@ -1,10 +1,10 @@
 {
-  "Author": "Eisenhuth",
-  "Name": "ChatGPT for FFXIV",
-  "Description": "Lets you interact with ChatGPT through the in-game chat. Configuration requires an API key.",
+  "Author": "OllyMolly006",
+  "Name": "Chat with AI support for FFXIV",
+  "Description": "Lets you interact with AI through the in-game chat. Configuration requires an API key, endpoint and model",
   "Punchline": "has science gone too far?",
   "Changelog": "- updated for Dalamud api12",
-  "InternalName": "ChatGPTPlugin",
+  "InternalName": "AIChatPlugin",
   "Tags": ["ui", "chat", "ai"],
-  "RepoUrl": "https://github.com/Eisenhuth/dalamud-chatgpt"
+  "RepoUrl": "https://github.com/OllyMolly006/dalamud-askai"
 }

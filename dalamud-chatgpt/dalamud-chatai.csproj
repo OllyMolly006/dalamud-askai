@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>ChatGPTPlugin</AssemblyName>
+        <AssemblyName>ChatAIPlugin</AssemblyName>
         <TargetFramework>net9.0-windows</TargetFramework>
         <PlatformTarget>x64</PlatformTarget>
         <Platforms>x64;AnyCPU</Platforms>
         <LangVersion>latest</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <OutputPath>$(AppData)\Eisenhuth\DalamudDevPlugins\ChatGPTPlugin\</OutputPath>
+        <OutputPath>$(AppData)\OllyMolly006\DalamudDevPlugins\ChatAIPlugin\</OutputPath>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         <AssemblyVersion>1.1.2.2</AssemblyVersion>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-        <PackageProjectUrl>https://github.com/Eisenhuth/dalamud-chatgpt</PackageProjectUrl>
-        <Description>Lets you interact with ChatGPT through the in-game chat. Configuration requires an API key.</Description>
-        <RepositoryUrl>https://github.com/Eisenhuth/dalamud-chatgpt</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/OllyMolly006/dalamud-askai</PackageProjectUrl>
+        <Description>Lets you interact with AI models through the in-game chat. Configuration requires an API key.</Description>
+        <RepositoryUrl>https://github.com/OllyMolly006/dalamud-askai</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup>

@@ -17,7 +17,7 @@ namespace xivgpt
 
     public class ChatGPTPlugin : IDalamudPlugin
     {
-        public string Name =>"ChatGPT for FFXIV";
+        public string Name =>"Chat with AI for FFXIV";
         private const string commandName = "/gpt";
         private static bool drawConfiguration;
         
@@ -54,7 +54,7 @@ namespace xivgpt
         {
             if (configKey == string.Empty)
             {
-                chatGui.Print("ChatGPT>> enter an API key in the configuration");
+                chatGui.Print("ChatGPT>> enter an API key, endpoint and model name in the configuration");
                 OpenConfig();
                 return;
             }
@@ -79,7 +79,7 @@ namespace xivgpt
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", configKey);
 
-            const string systemPrompt = "You are interacting through the in-game chat of the MMORPG Final Fantasy XIV, as such your responses can only be displayed as simple text without any markup.";
+            const string systemPrompt = "You are interacting through the in-game chat of the MMORPG Final Fantasy XIV, as such your responses can only be displayed as simple text without any markup and as concisely as possible.";
 
             input = Regex.Replace(input, @"(\\[^\n]|""|')", "");
             var requestBody = "{" +
