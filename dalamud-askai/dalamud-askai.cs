@@ -27,6 +27,9 @@ namespace xivgpt
         [PluginService] private static ICommandManager CommandManager { get; set; } = null!;
 
         private string configKey;
+        private string configEndpoint;
+        private string configModel;
+
         private int configMaxTokens;
         private bool configLineBreaks;
         private bool configAdditionalInfo;
@@ -54,14 +57,29 @@ namespace xivgpt
         {
             if (configKey == string.Empty)
             {
-                chatGui.Print("ChatGPT>> enter an API key, endpoint and model name in the configuration");
+                chatGui.Print("ChatAI>> enter an API key in the configuration");
                 OpenConfig();
                 return;
             }
-            
+
+            if (configEndpoint == string.Empty)
+            {
+                chatGui.Print("ChatAI>> enter an Endpoint path in the configuration");
+                OpenConfig();
+                return;
+            }
+
+            if (configModel == string.Empty)
+            {
+                chatGui.Print("ChatAI>> enter a model name in the configuration");
+                OpenConfig();
+                return;
+            }
+
+
             if (args == string.Empty)
             {
-                chatGui.Print("ChatGPT>> enter a prompt after the /gpt command");
+                chatGui.Print("ChatAI> enter a prompt after the /gpt command");
                 return;
             }
 
@@ -83,7 +101,7 @@ namespace xivgpt
 
             input = Regex.Replace(input, @"(\\[^\n]|""|')", "");
             var requestBody = "{" +
-                              $"\"model\": \"{Configuration.Model}\"," +
+                              $"\"model\": \"{configModel}\"," +
                               "\"messages\":" +
                               "[" +
                                 $"{{\"role\": \"system\",\"content\": \"{systemPrompt}\"}}, " +
@@ -95,7 +113,7 @@ namespace xivgpt
             
             var content = new StringContent(requestBody, Encoding.UTF8, "application/json");
             
-            var response = await client.PostAsync(Configuration.Endpoint, content);
+            var response = await client.PostAsync(configEndpoint, content);
             var responseBody = await response.Content.ReadAsStringAsync();
             
             var responseJson = JObject.Parse(responseBody);
@@ -113,7 +131,7 @@ namespace xivgpt
                 
                 if(configAdditionalInfo)
                     chatGui.Print($"ChatGPT>>\nprompt: {input}" +
-                                  $"\nmodel: {Configuration.Model}" +
+                                  $"\nmodel: {configModel}" +
                                   $"\nmax_tokens: {configMaxTokens}" +
                                   $"\nresponse length: {text.Length}" +
                                   $"\nchunks: {chunks.Count()}");
@@ -130,7 +148,7 @@ namespace xivgpt
 
                 if (configAdditionalInfo)
                 {
-                    errorMessage += $"\nmodel: {Configuration.Model}" +
+                    errorMessage += $"\nmodel: {configModel}" +
                                     $"\nmax_tokens: {configMaxTokens}" +
                                     $"\nresponse code: {(int) response.StatusCode} - {response.StatusCode}";
                 }
@@ -152,19 +170,40 @@ namespace xivgpt
             
             ImGui.Text("currently used model:");
             ImGui.SameLine();
-            if (ImGui.SmallButton($"{Configuration.Model}"))
+/*            if (ImGui.SmallButton($"{Configuration.Model}"))
             {
                 const string modelsDocs = "https://platform.openai.com/docs/models/gpt-4o";
                 Util.OpenLink(modelsDocs);
-            }
+            }*/
             ImGui.Spacing();
-            ImGui.InputText("API key", ref configKey, 60, ImGuiInputTextFlags.Password);
+            ImGui.InputText("API key", ref configKey, 100);
             ImGui.SameLine();
-            if (ImGui.SmallButton("get API key"))
+/*            if (ImGui.SmallButton("get API key"))
             {
                 const string apiKeysUrl = "https://platform.openai.com/account/api-keys";
                 Util.OpenLink(apiKeysUrl);
-            }
+            }*/
+
+
+            ImGui.Spacing();
+            ImGui.InputText("Endpoint name", ref configEndpoint, 100);
+            ImGui.SameLine();
+/*            if (ImGui.SmallButton("set up Endpoint"))
+            {
+                const string apiKeysUrl = "https://platform.openai.com/account/api-keys";
+                Util.OpenLink(apiKeysUrl);
+            }*/
+
+            ImGui.Spacing();
+            ImGui.InputText("Model name", ref configModel, 100);
+            ImGui.SameLine();
+/*            if (ImGui.SmallButton("set up model name"))
+            {
+                const string apiKeysUrl = "https://platform.openai.com/account/api-keys";
+                Util.OpenLink(apiKeysUrl);
+            }*/
+
+
             ImGui.Spacing();
             ImGui.SliderInt("max_tokens", ref configMaxTokens, 8, 4096);
             ImGui.SameLine();
@@ -195,6 +234,9 @@ namespace xivgpt
         private void LoadConfiguration()
         {
             configKey = configuration.ApiKey;
+            configEndpoint = configuration.Endpoint;
+            configModel = configuration.Model;
+
             configMaxTokens = configuration.MaxTokens != 0 ? configuration.MaxTokens : 256;
             configLineBreaks = configuration.RemoveLineBreaks;
             configAdditionalInfo = configuration.ShowAdditionalInfo;
@@ -203,6 +245,9 @@ namespace xivgpt
         private void SaveConfiguration()
         {
             configuration.ApiKey = configKey;
+            configuration.Endpoint = configEndpoint;
+            configuration.Model = configModel;
+
             configuration.MaxTokens = configMaxTokens;
             configuration.RemoveLineBreaks = configLineBreaks;
             configuration.ShowAdditionalInfo = configAdditionalInfo;

@@ -37,10 +37,11 @@
             <Private>false</Private>
         </Reference>
     </ItemGroup>
-
+    
     <ItemGroup>
-        <None Include="ChatGPTPlugin.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+      <None Update="ChatAIPlugin.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
+
 </Project>
